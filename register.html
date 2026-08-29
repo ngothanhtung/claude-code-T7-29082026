@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Sign Up</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@700;800&display=swap" rel="stylesheet" />
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          bgdark: "#090A14",
+          primary: "#DF6B33",
+        },
+        fontFamily: {
+          heading: ["Poppins", "sans-serif"],
+          body: ["Inter", "sans-serif"],
+        },
+      },
+    },
+  };
+</script>
+
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+
+<style>
+  body {
+    font-family: "Inter", sans-serif;
+  }
+  .font-heading {
+    font-family: "Poppins", sans-serif;
+  }
+  input:-webkit-autofill,
+  select:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px #12131f inset;
+    -webkit-text-fill-color: #f5f5f5;
+  }
+  select option {
+    background-color: #12131f;
+    color: #f5f5f5;
+  }
+</style>
+</head>
+
+<body class="bg-bgdark text-gray-200 min-h-screen flex items-center justify-center px-4 py-10 sm:px-6">
+
+  <div class="w-full max-w-[460px]">
+
+    <!-- Logo / Brand -->
+    <div class="flex flex-col items-center mb-8">
+      <div class="w-12 h-12 rounded-xl bg-primary/15 border border-primary/30 flex items-center justify-center mb-4">
+        <i data-lucide="user-plus" class="w-6 h-6 text-primary"></i>
+      </div>
+      <h1 class="font-heading font-extrabold text-2xl sm:text-3xl text-white text-center">Create Account</h1>
+      <p class="text-sm text-gray-400 mt-2 text-center">Sign up to get started</p>
+    </div>
+
+    <!-- Card -->
+    <div class="bg-[#0F1120] border border-white/5 rounded-2xl shadow-2xl shadow-black/40 p-6 sm:p-8">
+
+      <form id="registerForm" class="space-y-5" novalidate>
+
+        <!-- Full Name -->
+        <div>
+          <label for="fullName" class="block text-sm font-medium text-gray-300 mb-2">Full Name</label>
+          <div class="relative">
+            <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-500">
+              <i data-lucide="user" class="w-4.5 h-4.5"></i>
+            </span>
+            <input
+              id="fullName"
+              name="fullName"
+              type="text"
+              autocomplete="name"
+              required
+              placeholder="John Doe"
+              class="w-full bg-[#12131f] border border-white/10 rounded-lg py-2.5 pl-10 pr-3 text-sm text-gray-100 placeholder-gray-500 outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors"
+            />
+          </div>
+          <p id="fullNameError" class="hidden mt-1.5 text-xs text-red-400"></p>
+        </div>
+
+        <!-- Email -->
+        <div>
+          <label for="email" class="block text-sm font-medium text-gray-300 mb-2">Email</label>
+          <div class="relative">
+            <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-500">
+              <i data-lucide="mail" class="w-4.5 h-4.5"></i>
+            </span>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              autocomplete="email"
+              required
+              placeholder="you@example.com"
+              class="w-full bg-[#12131f] border border-white/10 rounded-lg py-2.5 pl-10 pr-3 text-sm text-gray-100 placeholder-gray-500 outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors"
+            />
+          </div>
+          <p id="emailError" class="hidden mt-1.5 text-xs text-red-400"></p>
+        </div>
+
+        <!-- Password -->
+        <div>
+          <label for="password" class="block text-sm font-medium text-gray-300 mb-2">Password</label>
+          <div class="relative">
+            <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-500">
+              <i data-lucide="lock" class="w-4.5 h-4.5"></i>
+            </span>
+            <input
+              id="password"
+              name="password"
+              type="password"
+              autocomplete="new-password"
+              required
+              placeholder="••••••••"
+              class="w-full bg-[#12131f] border border-white/10 rounded-lg py-2.5 pl-10 pr-10 text-sm text-gray-100 placeholder-gray-500 outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors"
+            />
+            <button
+              type="button"
+              id="togglePassword"
+              aria-label="Toggle password visibility"
+              class="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-500 hover:text-gray-300 transition-colors"
+            >
+              <i data-lucide="eye" class="w-4.5 h-4.5"></i>
+            </button>
+          </div>
+          <p id="passwordError" class="hidden mt-1.5 text-xs text-red-400"></p>
+        </div>
+
+        <!-- Confirm Password -->
+        <div>
+          <label for="confirmPassword" class="block text-sm font-medium text-gray-300 mb-2">Confirm Password</label>
+          <div class="relative">
+            <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-500">
+              <i data-lucide="lock" class="w-4.5 h-4.5"></i>
+            </span>
+            <input
+              id="confirmPassword"
+              name="confirmPassword"
+              type="password"
+              autocomplete="new-password"
+              required
+              placeholder="••••••••"
+              class="w-full bg-[#12131f] border border-white/10 rounded-lg py-2.5 pl-10 pr-10 text-sm text-gray-100 placeholder-gray-500 outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors"
+            />
+            <button
+              type="button"
+              id="toggleConfirmPassword"
+              aria-label="Toggle confirm password visibility"
+              class="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-500 hover:text-gray-300 transition-colors"
+            >
+              <i data-lucide="eye" class="w-4.5 h-4.5"></i>
+            </button>
+          </div>
+          <p id="confirmPasswordError" class="hidden mt-1.5 text-xs text-red-400"></p>
+        </div>
+
+        <!-- Gender -->
+        <div>
+          <label for="gender" class="block text-sm font-medium text-gray-300 mb-2">
+            Gender <span class="text-gray-500 font-normal">(optional)</span>
+          </label>
+          <div class="relative">
+            <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-500">
+              <i data-lucide="users" class="w-4.5 h-4.5"></i>
+            </span>
+            <select
+              id="gender"
+              name="gender"
+              class="w-full appearance-none bg-[#12131f] border border-white/10 rounded-lg py-2.5 pl-10 pr-9 text-sm text-gray-100 outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors"
+            >
+              <option value="">Prefer not to say</option>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+              <option value="other">Other</option>
+            </select>
+            <span class="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-500 pointer-events-none">
+              <i data-lucide="chevron-down" class="w-4.5 h-4.5"></i>
+            </span>
+          </div>
+        </div>
+
+        <!-- Address -->
+        <div>
+          <label for="address" class="block text-sm font-medium text-gray-300 mb-2">
+            Address <span class="text-gray-500 font-normal">(optional)</span>
+          </label>
+          <div class="relative">
+            <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-500">
+              <i data-lucide="map-pin" class="w-4.5 h-4.5"></i>
+            </span>
+            <input
+              id="address"
+              name="address"
+              type="text"
+              autocomplete="street-address"
+              placeholder="123 Main Street, City"
+              class="w-full bg-[#12131f] border border-white/10 rounded-lg py-2.5 pl-10 pr-3 text-sm text-gray-100 placeholder-gray-500 outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors"
+            />
+          </div>
+        </div>
+
+        <!-- Phone Number -->
+        <div>
+          <label for="phone" class="block text-sm font-medium text-gray-300 mb-2">
+            Phone Number <span class="text-gray-500 font-normal">(optional)</span>
+          </label>
+          <div class="relative">
+            <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-500">
+              <i data-lucide="phone" class="w-4.5 h-4.5"></i>
+            </span>
+            <input
+              id="phone"
+              name="phone"
+              type="tel"
+              inputmode="numeric"
+              autocomplete="tel"
+              maxlength="10"
+              placeholder="0912345678"
+              class="w-full bg-[#12131f] border border-white/10 rounded-lg py-2.5 pl-10 pr-3 text-sm text-gray-100 placeholder-gray-500 outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors"
+            />
+          </div>
+          <p id="phoneError" class="hidden mt-1.5 text-xs text-red-400"></p>
+        </div>
+
+        <!-- Agree to terms -->
+        <div>
+          <label class="flex items-start gap-2 cursor-pointer select-none text-sm text-gray-400">
+            <input
+              id="agreeTerms"
+              name="agreeTerms"
+              type="checkbox"
+              required
+              class="mt-0.5 w-4 h-4 rounded border-white/20 bg-[#12131f] text-primary focus:ring-primary focus:ring-offset-0 accent-primary"
+            />
+            <span>
+              I agree to the
+              <a href="#" class="text-primary hover:text-primary/80 font-medium transition-colors">Terms of Service</a>
+              and
+              <a href="#" class="text-primary hover:text-primary/80 font-medium transition-colors">Privacy Policy</a>
+            </span>
+          </label>
+          <p id="agreeTermsError" class="hidden mt-1.5 text-xs text-red-400"></p>
+        </div>
+
+        <!-- Submit -->
+        <button
+          type="submit"
+          class="w-full bg-primary hover:bg-primary/90 active:bg-primary/80 text-white font-semibold text-sm rounded-lg py-2.5 transition-colors flex items-center justify-center gap-2 shadow-lg shadow-primary/20"
+        >
+          Sign Up
+          <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </button>
+
+      </form>
+
+    </div>
+
+    <!-- Footer -->
+    <p class="text-center text-sm text-gray-500 mt-6">
+      Already have an account?
+      <a href="login.html" class="text-primary hover:text-primary/80 font-medium transition-colors">Back to Sign In</a>
+    </p>
+
+  </div>
+
+  <script>
+    lucide.createIcons();
+
+    const passwordInput = document.getElementById("password");
+    const confirmPasswordInput = document.getElementById("confirmPassword");
+
+    function bindToggle(buttonId, inputEl) {
+      const button = document.getElementById(buttonId);
+      button.addEventListener("click", () => {
+        const isPassword = inputEl.type === "password";
+        inputEl.type = isPassword ? "text" : "password";
+        button.innerHTML = isPassword
+          ? '<i data-lucide="eye-off" class="w-4.5 h-4.5"></i>'
+          : '<i data-lucide="eye" class="w-4.5 h-4.5"></i>';
+        lucide.createIcons();
+      });
+    }
+
+    bindToggle("togglePassword", passwordInput);
+    bindToggle("toggleConfirmPassword", confirmPasswordInput);
+
+    const registerForm = document.getElementById("registerForm");
+    const fullNameInput = document.getElementById("fullName");
+    const emailInput = document.getElementById("email");
+    const phoneInput = document.getElementById("phone");
+    const agreeTermsInput = document.getElementById("agreeTerms");
+
+    const fullNameError = document.getElementById("fullNameError");
+    const emailError = document.getElementById("emailError");
+    const passwordError = document.getElementById("passwordError");
+    const confirmPasswordError = document.getElementById("confirmPasswordError");
+    const phoneError = document.getElementById("phoneError");
+    const agreeTermsError = document.getElementById("agreeTermsError");
+
+    function setFieldError(input, errorEl, message) {
+      if (message) {
+        input.classList.add("border-red-500", "focus:border-red-500", "focus:ring-red-500");
+        input.classList.remove("border-white/10", "focus:border-primary", "focus:ring-primary");
+        errorEl.textContent = message;
+        errorEl.classList.remove("hidden");
+      } else {
+        input.classList.remove("border-red-500", "focus:border-red-500", "focus:ring-red-500");
+        input.classList.add("border-white/10", "focus:border-primary", "focus:ring-primary");
+        errorEl.textContent = "";
+        errorEl.classList.add("hidden");
+      }
+    }
+
+    function setCheckboxError(input, errorEl, message) {
+      if (message) {
+        errorEl.textContent = message;
+        errorEl.classList.remove("hidden");
+      } else {
+        errorEl.textContent = "";
+        errorEl.classList.add("hidden");
+      }
+    }
+
+    const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+    const PHONE_PATTERN = /^\d{10}$/;
+
+    function validateFullName() {
+      if (fullNameInput.validity.valueMissing || !fullNameInput.value.trim()) {
+        setFieldError(fullNameInput, fullNameError, "Full name is required.");
+        return false;
+      }
+      setFieldError(fullNameInput, fullNameError, "");
+      return true;
+    }
+
+    function validateEmail() {
+      if (emailInput.validity.valueMissing) {
+        setFieldError(emailInput, emailError, "Email is required.");
+        return false;
+      }
+      if (emailInput.validity.typeMismatch || !EMAIL_PATTERN.test(emailInput.value.trim())) {
+        setFieldError(emailInput, emailError, "Please enter a valid email address (e.g. name@example.com).");
+        return false;
+      }
+      setFieldError(emailInput, emailError, "");
+      return true;
+    }
+
+    function validatePassword() {
+      if (passwordInput.validity.valueMissing) {
+        setFieldError(passwordInput, passwordError, "Password is required.");
+        return false;
+      }
+      setFieldError(passwordInput, passwordError, "");
+      return true;
+    }
+
+    function validateConfirmPassword() {
+      if (confirmPasswordInput.validity.valueMissing) {
+        setFieldError(confirmPasswordInput, confirmPasswordError, "Please confirm your password.");
+        return false;
+      }
+      if (confirmPasswordInput.value !== passwordInput.value) {
+        setFieldError(confirmPasswordInput, confirmPasswordError, "Passwords do not match.");
+        return false;
+      }
+      setFieldError(confirmPasswordInput, confirmPasswordError, "");
+      return true;
+    }
+
+    function validatePhone() {
+      const value = phoneInput.value.trim();
+      if (!value) {
+        setFieldError(phoneInput, phoneError, "");
+        return true;
+      }
+      if (!PHONE_PATTERN.test(value)) {
+        setFieldError(phoneInput, phoneError, "Phone number must be exactly 10 digits.");
+        return false;
+      }
+      setFieldError(phoneInput, phoneError, "");
+      return true;
+    }
+
+    function validateAgreeTerms() {
+      if (!agreeTermsInput.checked) {
+        setCheckboxError(agreeTermsInput, agreeTermsError, "You must agree to the terms to continue.");
+        return false;
+      }
+      setCheckboxError(agreeTermsInput, agreeTermsError, "");
+      return true;
+    }
+
+    fullNameInput.addEventListener("input", validateFullName);
+    emailInput.addEventListener("input", validateEmail);
+    passwordInput.addEventListener("input", () => {
+      validatePassword();
+      if (confirmPasswordInput.value) validateConfirmPassword();
+    });
+    confirmPasswordInput.addEventListener("input", validateConfirmPassword);
+    phoneInput.addEventListener("input", () => {
+      phoneInput.value = phoneInput.value.replace(/\D/g, "").slice(0, 10);
+      validatePhone();
+    });
+    agreeTermsInput.addEventListener("change", validateAgreeTerms);
+
+    registerForm.addEventListener("submit", (e) => {
+      const isFullNameValid = validateFullName();
+      const isEmailValid = validateEmail();
+      const isPasswordValid = validatePassword();
+      const isConfirmPasswordValid = validateConfirmPassword();
+      const isPhoneValid = validatePhone();
+      const isAgreeTermsValid = validateAgreeTerms();
+
+      if (
+        !isFullNameValid ||
+        !isEmailValid ||
+        !isPasswordValid ||
+        !isConfirmPasswordValid ||
+        !isPhoneValid ||
+        !isAgreeTermsValid
+      ) {
+        e.preventDefault();
+      }
+    });
+  </script>
+
+</body>
+</html>

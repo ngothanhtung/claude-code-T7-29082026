@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Báo cáo Kinh doanh &amp; Marketing — E-commerce</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@700;800&display=swap" rel="stylesheet" />
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          bgdark: "#090A14",
+          primary: "#DF6B33",
+        },
+        fontFamily: {
+          heading: ["Poppins", "sans-serif"],
+          body: ["Inter", "sans-serif"],
+        },
+      },
+    },
+  };
+</script>
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+<style>
+  body { font-family: "Inter", sans-serif; }
+  .font-heading { font-family: "Poppins", sans-serif; }
+  .chart-box { position: relative; height: 300px; }
+  table.data-table td, table.data-table th { font-variant-numeric: tabular-nums; }
+</style>
+</head>
+<body class="bg-bgdark text-white min-h-screen">
+  <div class="max-w-[1200px] mx-auto px-4 py-10 sm:px-6">
+
+    <!-- Header -->
+    <header class="flex flex-col gap-2 mb-10">
+      <div class="flex items-center gap-2 text-primary">
+        <i data-lucide="bar-chart-3" class="w-6 h-6"></i>
+        <span class="text-sm font-medium tracking-wide uppercase">E-commerce Dashboard</span>
+      </div>
+      <h1 class="font-heading font-extrabold text-2xl sm:text-3xl">Báo cáo Doanh thu, Kinh doanh &amp; Marketing</h1>
+      <p class="text-white/60 text-sm">Kỳ báo cáo: Th1 – Th8 2026 · Dữ liệu minh họa (mock data)</p>
+    </header>
+
+    <!-- Stat tiles -->
+    <section class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
+      <div class="rounded-xl bg-[#0F1120] border border-white/10 p-4">
+        <div class="flex items-center gap-2 text-white/60 text-xs mb-2"><i data-lucide="dollar-sign" class="w-4 h-4"></i>Tổng doanh thu</div>
+        <div class="font-heading font-extrabold text-2xl">$4.82M</div>
+        <div class="text-xs mt-1 text-[#0ca30c]">▲ 18.4% so với cùng kỳ</div>
+      </div>
+      <div class="rounded-xl bg-[#0F1120] border border-white/10 p-4">
+        <div class="flex items-center gap-2 text-white/60 text-xs mb-2"><i data-lucide="shopping-cart" class="w-4 h-4"></i>Tổng đơn hàng</div>
+        <div class="font-heading font-extrabold text-2xl">86,420</div>
+        <div class="text-xs mt-1 text-[#0ca30c]">▲ 12.1% so với cùng kỳ</div>
+      </div>
+      <div class="rounded-xl bg-[#0F1120] border border-white/10 p-4">
+        <div class="flex items-center gap-2 text-white/60 text-xs mb-2"><i data-lucide="receipt" class="w-4 h-4"></i>Giá trị đơn TB (AOV)</div>
+        <div class="font-heading font-extrabold text-2xl">$55.80</div>
+        <div class="text-xs mt-1 text-[#e66767]">▼ 2.3% so với cùng kỳ</div>
+      </div>
+      <div class="rounded-xl bg-[#0F1120] border border-white/10 p-4">
+        <div class="flex items-center gap-2 text-white/60 text-xs mb-2"><i data-lucide="target" class="w-4 h-4"></i>ROAS Marketing</div>
+        <div class="font-heading font-extrabold text-2xl">4.6x</div>
+        <div class="text-xs mt-1 text-[#0ca30c]">▲ 0.4x so với cùng kỳ</div>
+      </div>
+    </section>
+
+    <!-- Doanh thu bán hàng -->
+    <section class="mb-12">
+      <h2 class="font-heading font-extrabold text-lg mb-4 flex items-center gap-2">
+        <i data-lucide="trending-up" class="w-5 h-5 text-primary"></i>Doanh thu bán hàng
+      </h2>
+
+      <div class="grid lg:grid-cols-3 gap-4 mb-6">
+        <div class="lg:col-span-2 rounded-xl bg-[#0F1120] border border-white/10 p-4">
+          <p class="text-sm font-medium mb-1">Doanh thu &amp; đơn hàng theo tháng</p>
+          <p class="text-xs text-white/50 mb-3">Cột: doanh thu ($) · Đường: số đơn hàng</p>
+          <div class="chart-box"><canvas id="revenueOrdersChart"></canvas></div>
+        </div>
+        <div class="rounded-xl bg-[#0F1120] border border-white/10 p-4">
+          <p class="text-sm font-medium mb-1">Doanh thu theo danh mục</p>
+          <p class="text-xs text-white/50 mb-3">Tỷ trọng đóng góp doanh thu</p>
+          <div class="chart-box"><canvas id="categoryChart"></canvas></div>
+        </div>
+      </div>
+
+      <div class="rounded-xl bg-[#0F1120] border border-white/10 p-4 overflow-x-auto">
+        <p class="text-sm font-medium mb-3">Chi tiết doanh thu theo tháng</p>
+        <table class="data-table w-full text-sm min-w-[560px]">
+          <thead>
+            <tr class="text-left text-white/50 border-b border-white/10">
+              <th class="py-2 pr-4 font-medium">Tháng</th>
+              <th class="py-2 pr-4 font-medium text-right">Doanh thu</th>
+              <th class="py-2 pr-4 font-medium text-right">Đơn hàng</th>
+              <th class="py-2 pr-4 font-medium text-right">AOV</th>
+              <th class="py-2 font-medium text-right">Tăng trưởng</th>
+            </tr>
+          </thead>
+          <tbody id="revenueTableBody" class="divide-y divide-white/5"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Kết quả kinh doanh -->
+    <section class="mb-12">
+      <h2 class="font-heading font-extrabold text-lg mb-4 flex items-center gap-2">
+        <i data-lucide="briefcase" class="w-5 h-5 text-primary"></i>Kết quả kinh doanh
+      </h2>
+
+      <div class="grid lg:grid-cols-2 gap-4 mb-6">
+        <div class="rounded-xl bg-[#0F1120] border border-white/10 p-4">
+          <p class="text-sm font-medium mb-1">Doanh thu, chi phí &amp; lợi nhuận</p>
+          <p class="text-xs text-white/50 mb-3">Theo quý (đơn vị: nghìn USD)</p>
+          <div class="chart-box"><canvas id="profitChart"></canvas></div>
+        </div>
+        <div class="rounded-xl bg-[#0F1120] border border-white/10 p-4">
+          <p class="text-sm font-medium mb-1">Tỷ lệ khách hàng mới vs. quay lại</p>
+          <p class="text-xs text-white/50 mb-3">Theo quý</p>
+          <div class="chart-box"><canvas id="customerChart"></canvas></div>
+        </div>
+      </div>
+
+      <div class="rounded-xl bg-[#0F1120] border border-white/10 p-4 overflow-x-auto">
+        <p class="text-sm font-medium mb-3">Chỉ số kinh doanh theo quý</p>
+        <table class="data-table w-full text-sm min-w-[620px]">
+          <thead>
+            <tr class="text-left text-white/50 border-b border-white/10">
+              <th class="py-2 pr-4 font-medium">Quý</th>
+              <th class="py-2 pr-4 font-medium text-right">Doanh thu</th>
+              <th class="py-2 pr-4 font-medium text-right">Chi phí</th>
+              <th class="py-2 pr-4 font-medium text-right">Lợi nhuận</th>
+              <th class="py-2 font-medium text-right">Biên lợi nhuận</th>
+            </tr>
+          </thead>
+          <tbody id="businessTableBody" class="divide-y divide-white/5"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Marketing -->
+    <section class="mb-4">
+      <h2 class="font-heading font-extrabold text-lg mb-4 flex items-center gap-2">
+        <i data-lucide="megaphone" class="w-5 h-5 text-primary"></i>Số liệu Marketing
+      </h2>
+
+      <div class="grid lg:grid-cols-2 gap-4 mb-6">
+        <div class="rounded-xl bg-[#0F1120] border border-white/10 p-4">
+          <p class="text-sm font-medium mb-1">Chi phí quảng cáo theo kênh</p>
+          <p class="text-xs text-white/50 mb-3">Đơn vị: nghìn USD / tháng</p>
+          <div class="chart-box"><canvas id="channelSpendChart"></canvas></div>
+        </div>
+        <div class="rounded-xl bg-[#0F1120] border border-white/10 p-4">
+          <p class="text-sm font-medium mb-1">Tỷ lệ chuyển đổi theo kênh</p>
+          <p class="text-xs text-white/50 mb-3">Conversion rate (%)</p>
+          <div class="chart-box"><canvas id="conversionChart"></canvas></div>
+        </div>
+      </div>
+
+      <div class="rounded-xl bg-[#0F1120] border border-white/10 p-4 overflow-x-auto">
+        <p class="text-sm font-medium mb-3">Hiệu quả marketing theo kênh</p>
+        <table class="data-table w-full text-sm min-w-[680px]">
+          <thead>
+            <tr class="text-left text-white/50 border-b border-white/10">
+              <th class="py-2 pr-4 font-medium">Kênh</th>
+              <th class="py-2 pr-4 font-medium text-right">Chi phí</th>
+              <th class="py-2 pr-4 font-medium text-right">Số khách truy cập</th>
+              <th class="py-2 pr-4 font-medium text-right">Chuyển đổi</th>
+              <th class="py-2 pr-4 font-medium text-right">CPA</th>
+              <th class="py-2 font-medium text-right">ROAS</th>
+            </tr>
+          </thead>
+          <tbody id="marketingTableBody" class="divide-y divide-white/5"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <footer class="text-center text-xs text-white/40 pt-6 border-t border-white/10">
+      Dữ liệu minh họa (mock) — chỉ dùng cho mục đích demo giao diện báo cáo.
+    </footer>
+  </div>
+
+<script>
+  lucide.createIcons();
+
+  // ---- Shared theme tokens ----
+  const ink = { primary: "#ffffff", secondary: "#c3c2b7", muted: "#898781" };
+  const grid = "#2c2c2a";
+  const surface = "#0F1120";
+  const brand = "#DF6B33";
+  const cat = {
+    blue: "#3987e5",
+    orange: "#d95926",
+    aqua: "#199e70",
+    yellow: "#c98500",
+    magenta: "#d55181",
+    green: "#008300",
+    violet: "#9085e9",
+    red: "#e66767",
+  };
+  const good = "#0ca30c";
+
+  Chart.defaults.color = ink.secondary;
+  Chart.defaults.font.family = "Inter, sans-serif";
+  Chart.defaults.borderColor = grid;
+
+  const money = (n) => "$" + n.toLocaleString("en-US");
+  const moneyK = (n) => "$" + n.toLocaleString("en-US") + "K";
+
+  // ---- Mock data: Doanh thu bán hàng ----
+  const months = ["T1", "T2", "T3", "T4", "T5", "T6", "T7", "T8"];
+  const revenue = [412000, 438000, 465000, 501000, 548000, 592000, 640000, 705000];
+  const orders = [7800, 8100, 8400, 8900, 9600, 10200, 10900, 11700];
+
+  new Chart(document.getElementById("revenueOrdersChart"), {
+    data: {
+      labels: months,
+      datasets: [
+        {
+          type: "bar",
+          label: "Doanh thu",
+          data: revenue,
+          backgroundColor: brand,
+          borderRadius: 4,
+          maxBarThickness: 24,
+          yAxisID: "y",
+        },
+        {
+          type: "line",
+          label: "Số đơn hàng",
+          data: orders,
+          borderColor: cat.blue,
+          backgroundColor: cat.blue,
+          borderWidth: 2,
+          pointRadius: 4,
+          pointBackgroundColor: cat.blue,
+          pointBorderColor: surface,
+          pointBorderWidth: 2,
+          tension: 0.3,
+          yAxisID: "y1",
+        },
+      ],
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      interaction: { mode: "index", intersect: false },
+      plugins: {
+        legend: { position: "top", labels: { boxWidth: 10, boxHeight: 10, color: ink.secondary } },
+        tooltip: {
+          backgroundColor: "#171827",
+          borderColor: "rgba(255,255,255,0.1)",
+          borderWidth: 1,
+          titleColor: ink.primary,
+          bodyColor: ink.secondary,
+          callbacks: {
+            label: (ctx) =>
+              ctx.dataset.label === "Doanh thu"
+                ? ` Doanh thu: ${money(ctx.parsed.y)}`
+                : ` Đơn hàng: ${ctx.parsed.y.toLocaleString()}`,
+          },
+        },
+      },
+      scales: {
+        x: { grid: { display: false } },
+        y: {
+          position: "left",
+          grid: { color: grid },
+          ticks: { callback: (v) => "$" + v / 1000 + "K" },
+          title: { display: false },
+        },
+        y1: {
+          position: "right",
+          grid: { display: false },
+          ticks: { callback: (v) => v.toLocaleString() },
+        },
+      },
+    },
+  });
+
+  const categories = [
+    { name: "Thời trang", value: 168000, color: cat.blue },
+    { name: "Điện tử", value: 142000, color: cat.orange },
+    { name: "Gia dụng", value: 96000, color: cat.aqua },
+    { name: "Làm đẹp", value: 78000, color: cat.yellow },
+    { name: "Khác", value: 41000, color: cat.violet },
+  ];
+
+  new Chart(document.getElementById("categoryChart"), {
+    type: "doughnut",
+    data: {
+      labels: categories.map((c) => c.name),
+      datasets: [
+        {
+          data: categories.map((c) => c.value),
+          backgroundColor: categories.map((c) => c.color),
+          borderColor: surface,
+          borderWidth: 2,
+        },
+      ],
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      cutout: "62%",
+      plugins: {
+        legend: { position: "bottom", labels: { boxWidth: 10, boxHeight: 10, color: ink.secondary, padding: 12 } },
+        tooltip: {
+          backgroundColor: "#171827",
+          borderColor: "rgba(255,255,255,0.1)",
+          borderWidth: 1,
+          titleColor: ink.primary,
+          bodyColor: ink.secondary,
+          callbacks: { label: (ctx) => ` ${ctx.label}: ${money(ctx.parsed)}` },
+        },
+      },
+    },
+  });
+
+  const revTable = document.getElementById("revenueTableBody");
+  months.forEach((m, i) => {
+    const growth = i === 0 ? null : (((revenue[i] - revenue[i - 1]) / revenue[i - 1]) * 100).toFixed(1);
+    const aov = (revenue[i] / orders[i]).toFixed(2);
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+      <td class="py-2 pr-4">${m}/2026</td>
+      <td class="py-2 pr-4 text-right">${money(revenue[i])}</td>
+      <td class="py-2 pr-4 text-right">${orders[i].toLocaleString()}</td>
+      <td class="py-2 pr-4 text-right">$${aov}</td>
+      <td class="py-2 text-right ${growth === null ? "text-white/40" : "text-[#0ca30c]"}">${growth === null ? "—" : "▲ " + growth + "%"}</td>
+    `;
+    revTable.appendChild(tr);
+  });
+
+  // ---- Mock data: Kết quả kinh doanh ----
+  const quarters = ["Q1", "Q2", "Q3", "Q4"];
+  const bizRevenue = [1315, 1641, 1972, 2358]; // nghìn USD... actually thousands representing $K in hundreds; treat as $K*1000
+  const bizCost = [980, 1180, 1380, 1610];
+  const bizProfit = bizRevenue.map((r, i) => r - bizCost[i]);
+
+  new Chart(document.getElementById("profitChart"), {
+    type: "bar",
+    data: {
+      labels: quarters,
+      datasets: [
+        { label: "Doanh thu", data: bizRevenue, backgroundColor: brand, borderRadius: 4, maxBarThickness: 24 },
+        { label: "Chi phí", data: bizCost, backgroundColor: cat.red, borderRadius: 4, maxBarThickness: 24 },
+        { label: "Lợi nhuận", data: bizProfit, backgroundColor: good, borderRadius: 4, maxBarThickness: 24 },
+      ],
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { position: "top", labels: { boxWidth: 10, boxHeight: 10, color: ink.secondary } },
+        tooltip: {
+          backgroundColor: "#171827",
+          borderColor: "rgba(255,255,255,0.1)",
+          borderWidth: 1,
+          titleColor: ink.primary,
+          bodyColor: ink.secondary,
+          callbacks: { label: (ctx) => ` ${ctx.dataset.label}: ${moneyK(ctx.parsed.y)}` },
+        },
+      },
+      scales: {
+        x: { grid: { display: false } },
+        y: { grid: { color: grid }, ticks: { callback: (v) => "$" + v + "K" } },
+      },
+    },
+  });
+
+  const newCustomers = [58, 55, 52, 49];
+  const returningCustomers = [42, 45, 48, 51];
+
+  new Chart(document.getElementById("customerChart"), {
+    type: "bar",
+    data: {
+      labels: quarters,
+      datasets: [
+        { label: "Khách mới", data: newCustomers, backgroundColor: cat.blue, borderRadius: 4, maxBarThickness: 24, stack: "s" },
+        { label: "Khách quay lại", data: returningCustomers, backgroundColor: cat.aqua, borderRadius: 4, maxBarThickness: 24, stack: "s" },
+      ],
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { position: "top", labels: { boxWidth: 10, boxHeight: 10, color: ink.secondary } },
+        tooltip: {
+          backgroundColor: "#171827",
+          borderColor: "rgba(255,255,255,0.1)",
+          borderWidth: 1,
+          titleColor: ink.primary,
+          bodyColor: ink.secondary,
+          callbacks: { label: (ctx) => ` ${ctx.dataset.label}: ${ctx.parsed.y}%` },
+        },
+      },
+      scales: {
+        x: { grid: { display: false }, stacked: true },
+        y: { grid: { color: grid }, stacked: true, ticks: { callback: (v) => v + "%" }, max: 100 },
+      },
+    },
+  });
+
+  const businessTable = document.getElementById("businessTableBody");
+  quarters.forEach((q, i) => {
+    const margin = ((bizProfit[i] / bizRevenue[i]) * 100).toFixed(1);
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+      <td class="py-2 pr-4">${q} 2026</td>
+      <td class="py-2 pr-4 text-right">${moneyK(bizRevenue[i])}</td>
+      <td class="py-2 pr-4 text-right">${moneyK(bizCost[i])}</td>
+      <td class="py-2 pr-4 text-right">${moneyK(bizProfit[i])}</td>
+      <td class="py-2 text-right text-[#0ca30c]">${margin}%</td>
+    `;
+    businessTable.appendChild(tr);
+  });
+
+  // ---- Mock data: Marketing ----
+  const marketing = [
+    { channel: "Google Ads", spend: 42, visitors: 128000, conversions: 5120, color: cat.blue },
+    { channel: "Facebook Ads", spend: 36, visitors: 104000, conversions: 3640, color: cat.orange },
+    { channel: "TikTok Ads", spend: 24, visitors: 96000, conversions: 2880, color: cat.aqua },
+    { channel: "Email", spend: 6, visitors: 38000, conversions: 2280, color: cat.yellow },
+    { channel: "Organic/SEO", spend: 4, visitors: 86000, conversions: 3010, color: cat.violet },
+  ];
+
+  new Chart(document.getElementById("channelSpendChart"), {
+    type: "bar",
+    data: {
+      labels: marketing.map((m) => m.channel),
+      datasets: [
+        {
+          label: "Chi phí",
+          data: marketing.map((m) => m.spend),
+          backgroundColor: marketing.map((m) => m.color),
+          borderRadius: 4,
+          maxBarThickness: 24,
+        },
+      ],
+    },
+    options: {
+      indexAxis: "y",
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: "#171827",
+          borderColor: "rgba(255,255,255,0.1)",
+          borderWidth: 1,
+          titleColor: ink.primary,
+          bodyColor: ink.secondary,
+          callbacks: { label: (ctx) => ` Chi phí: ${moneyK(ctx.parsed.x)}` },
+        },
+      },
+      scales: {
+        x: { grid: { color: grid }, ticks: { callback: (v) => "$" + v + "K" } },
+        y: { grid: { display: false } },
+      },
+    },
+  });
+
+  new Chart(document.getElementById("conversionChart"), {
+    type: "bar",
+    data: {
+      labels: marketing.map((m) => m.channel),
+      datasets: [
+        {
+          label: "Tỷ lệ chuyển đổi",
+          data: marketing.map((m) => +((m.conversions / m.visitors) * 100).toFixed(2)),
+          backgroundColor: marketing.map((m) => m.color),
+          borderRadius: 4,
+          maxBarThickness: 24,
+        },
+      ],
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: "#171827",
+          borderColor: "rgba(255,255,255,0.1)",
+          borderWidth: 1,
+          titleColor: ink.primary,
+          bodyColor: ink.secondary,
+          callbacks: { label: (ctx) => ` Chuyển đổi: ${ctx.parsed.y}%` },
+        },
+      },
+      scales: {
+        x: { grid: { display: false } },
+        y: { grid: { color: grid }, ticks: { callback: (v) => v + "%" } },
+      },
+    },
+  });
+
+  const marketingTable = document.getElementById("marketingTableBody");
+  marketing.forEach((m) => {
+    const cpa = (m.spend * 1000) / m.conversions;
+    const revenueFromChannel = m.conversions * 55.8;
+    const roas = revenueFromChannel / (m.spend * 1000);
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+      <td class="py-2 pr-4 flex items-center gap-2">
+        <span class="inline-block w-2.5 h-2.5 rounded-full" style="background:${m.color}"></span>${m.channel}
+      </td>
+      <td class="py-2 pr-4 text-right">${moneyK(m.spend)}</td>
+      <td class="py-2 pr-4 text-right">${m.visitors.toLocaleString()}</td>
+      <td class="py-2 pr-4 text-right">${m.conversions.toLocaleString()}</td>
+      <td class="py-2 pr-4 text-right">$${cpa.toFixed(2)}</td>
+      <td class="py-2 text-right">${roas.toFixed(1)}x</td>
+    `;
+    marketingTable.appendChild(tr);
+  });
+</script>
+</body>
+</html>
