@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Shoply — Nền tảng thương mại điện tử hàng đầu</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          bgdark: "#090A14",
+          primary: "#DF6B33",
+        },
+        fontFamily: {
+          heading: ["Plus Jakarta Sans", "sans-serif"],
+          body: ["Plus Jakarta Sans", "sans-serif"],
+        },
+      },
+    },
+  };
+</script>
+
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+
+<style>
+  body {
+    font-family: "Plus Jakarta Sans", sans-serif;
+  }
+  .font-heading {
+    font-family: "Plus Jakarta Sans", sans-serif;
+  }
+</style>
+</head>
+
+<body class="bg-bgdark text-gray-200">
+
+  <!-- Navbar -->
+  <header class="sticky top-0 z-30 border-b border-white/5 bg-bgdark/80 backdrop-blur">
+    <nav class="max-w-6xl mx-auto flex items-center justify-between px-4 sm:px-6 py-4">
+      <a href="index.html" class="flex items-center gap-2">
+        <div class="w-9 h-9 rounded-lg bg-primary/15 border border-primary/30 flex items-center justify-center">
+          <i data-lucide="shopping-bag" class="w-5 h-5 text-primary"></i>
+        </div>
+        <span class="font-heading font-extrabold text-lg text-white">Shoply</span>
+      </a>
+
+      <div class="hidden md:flex items-center gap-8 text-sm text-gray-400">
+        <a href="#features" class="hover:text-white transition-colors">Tính năng</a>
+        <a href="#categories" class="hover:text-white transition-colors">Danh mục</a>
+        <a href="#testimonials" class="hover:text-white transition-colors">Khách hàng</a>
+        <a href="#faq" class="hover:text-white transition-colors">Hỏi đáp</a>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <a href="login.html" class="hidden sm:inline-block text-sm font-medium text-gray-300 hover:text-white transition-colors">Đăng nhập</a>
+        <a
+          href="register.html"
+          class="inline-flex items-center gap-1.5 bg-primary hover:bg-primary/90 active:bg-primary/80 text-white text-sm font-semibold rounded-lg px-4 py-2 transition-colors shadow-lg shadow-primary/20"
+        >
+          Bắt đầu
+          <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Hero -->
+  <section class="relative overflow-hidden">
+    <div class="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top,_rgba(223,107,51,0.18),_transparent_60%)]"></div>
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 pt-16 pb-20 sm:pt-24 sm:pb-28 text-center">
+      <span class="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 text-primary text-xs font-medium px-3 py-1 mb-6">
+        <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
+        Nền tảng thương mại điện tử toàn diện
+      </span>
+      <h1 class="font-heading font-extrabold text-3xl sm:text-5xl text-white leading-tight max-w-3xl mx-auto">
+        Kinh doanh trực tuyến <span class="text-primary">dễ dàng &amp; hiệu quả</span> hơn bao giờ hết
+      </h1>
+      <p class="text-gray-400 text-sm sm:text-base mt-5 max-w-xl mx-auto">
+        Shoply giúp hàng nghìn nhà bán hàng xây dựng cửa hàng trực tuyến, quản lý đơn hàng và
+        tiếp cận hàng triệu khách hàng chỉ trong vài phút — không cần kỹ năng lập trình.
+      </p>
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-3 mt-8">
+        <a
+          href="register.html"
+          class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-primary hover:bg-primary/90 active:bg-primary/80 text-white font-semibold text-sm rounded-lg px-6 py-3 transition-colors shadow-lg shadow-primary/20"
+        >
+          Dùng thử miễn phí
+          <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </a>
+        <a
+          href="#features"
+          class="w-full sm:w-auto inline-flex items-center justify-center gap-2 border border-white/10 hover:bg-white/5 text-gray-200 font-semibold text-sm rounded-lg px-6 py-3 transition-colors"
+        >
+          <i data-lucide="play-circle" class="w-4 h-4"></i>
+          Xem giới thiệu
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <section class="border-y border-white/5 bg-[#0F1120]/60">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-10 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+      <div>
+        <div class="font-heading font-extrabold text-2xl sm:text-3xl text-white">50K+</div>
+        <div class="text-xs sm:text-sm text-gray-400 mt-1">Cửa hàng đang hoạt động</div>
+      </div>
+      <div>
+        <div class="font-heading font-extrabold text-2xl sm:text-3xl text-white">2.4M+</div>
+        <div class="text-xs sm:text-sm text-gray-400 mt-1">Đơn hàng mỗi tháng</div>
+      </div>
+      <div>
+        <div class="font-heading font-extrabold text-2xl sm:text-3xl text-white">99.9%</div>
+        <div class="text-xs sm:text-sm text-gray-400 mt-1">Thời gian hoạt động</div>
+      </div>
+      <div>
+        <div class="font-heading font-extrabold text-2xl sm:text-3xl text-white">120+</div>
+        <div class="text-xs sm:text-sm text-gray-400 mt-1">Quốc gia hỗ trợ</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section id="features" class="max-w-6xl mx-auto px-4 sm:px-6 py-20">
+    <div class="text-center max-w-xl mx-auto mb-12">
+      <span class="text-primary text-xs font-semibold uppercase tracking-wide">Tính năng nổi bật</span>
+      <h2 class="font-heading font-extrabold text-2xl sm:text-3xl text-white mt-3">Mọi công cụ bạn cần để bán hàng</h2>
+      <p class="text-gray-400 text-sm mt-3">Từ quản lý kho, thanh toán đến vận chuyển — tất cả trong một nền tảng duy nhất.</p>
+    </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      <div class="bg-[#0F1120] border border-white/5 rounded-2xl p-6">
+        <div class="w-10 h-10 rounded-lg bg-primary/15 border border-primary/30 flex items-center justify-center mb-4">
+          <i data-lucide="store" class="w-5 h-5 text-primary"></i>
+        </div>
+        <h3 class="text-white font-semibold mb-2">Xây dựng cửa hàng nhanh chóng</h3>
+        <p class="text-sm text-gray-400">Tạo cửa hàng trực tuyến chuyên nghiệp chỉ trong vài phút với giao diện kéo-thả trực quan.</p>
+      </div>
+      <div class="bg-[#0F1120] border border-white/5 rounded-2xl p-6">
+        <div class="w-10 h-10 rounded-lg bg-primary/15 border border-primary/30 flex items-center justify-center mb-4">
+          <i data-lucide="credit-card" class="w-5 h-5 text-primary"></i>
+        </div>
+        <h3 class="text-white font-semibold mb-2">Thanh toán an toàn</h3>
+        <p class="text-sm text-gray-400">Hỗ trợ đa dạng cổng thanh toán, mã hóa dữ liệu và bảo mật giao dịch theo chuẩn quốc tế.</p>
+      </div>
+      <div class="bg-[#0F1120] border border-white/5 rounded-2xl p-6">
+        <div class="w-10 h-10 rounded-lg bg-primary/15 border border-primary/30 flex items-center justify-center mb-4">
+          <i data-lucide="truck" class="w-5 h-5 text-primary"></i>
+        </div>
+        <h3 class="text-white font-semibold mb-2">Vận chuyển linh hoạt</h3>
+        <p class="text-sm text-gray-400">Kết nối với nhiều đơn vị vận chuyển, theo dõi đơn hàng theo thời gian thực.</p>
+      </div>
+      <div class="bg-[#0F1120] border border-white/5 rounded-2xl p-6">
+        <div class="w-10 h-10 rounded-lg bg-primary/15 border border-primary/30 flex items-center justify-center mb-4">
+          <i data-lucide="bar-chart-3" class="w-5 h-5 text-primary"></i>
+        </div>
+        <h3 class="text-white font-semibold mb-2">Báo cáo &amp; phân tích</h3>
+        <p class="text-sm text-gray-400">Theo dõi doanh thu, hành vi khách hàng và hiệu quả marketing bằng dashboard trực quan.</p>
+      </div>
+      <div class="bg-[#0F1120] border border-white/5 rounded-2xl p-6">
+        <div class="w-10 h-10 rounded-lg bg-primary/15 border border-primary/30 flex items-center justify-center mb-4">
+          <i data-lucide="headset" class="w-5 h-5 text-primary"></i>
+        </div>
+        <h3 class="text-white font-semibold mb-2">Hỗ trợ 24/7</h3>
+        <p class="text-sm text-gray-400">Đội ngũ chăm sóc khách hàng sẵn sàng hỗ trợ bạn mọi lúc, mọi nơi.</p>
+      </div>
+      <div class="bg-[#0F1120] border border-white/5 rounded-2xl p-6">
+        <div class="w-10 h-10 rounded-lg bg-primary/15 border border-primary/30 flex items-center justify-center mb-4">
+          <i data-lucide="shield-check" class="w-5 h-5 text-primary"></i>
+        </div>
+        <h3 class="text-white font-semibold mb-2">Bảo mật dữ liệu</h3>
+        <p class="text-sm text-gray-400">Dữ liệu khách hàng và giao dịch được bảo vệ với các tiêu chuẩn bảo mật cao nhất.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Categories -->
+  <section id="categories" class="border-y border-white/5 bg-[#0F1120]/60">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-20">
+      <div class="text-center max-w-xl mx-auto mb-12">
+        <span class="text-primary text-xs font-semibold uppercase tracking-wide">Ngành hàng</span>
+        <h2 class="font-heading font-extrabold text-2xl sm:text-3xl text-white mt-3">Đa dạng danh mục sản phẩm</h2>
+        <p class="text-gray-400 text-sm mt-3">Hàng triệu sản phẩm từ hàng chục ngành hàng khác nhau.</p>
+      </div>
+
+      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
+        <div class="bg-[#12131f] border border-white/5 rounded-xl p-5 flex flex-col items-center text-center gap-3 hover:border-primary/30 transition-colors">
+          <i data-lucide="shirt" class="w-6 h-6 text-primary"></i>
+          <span class="text-sm text-gray-300">Thời trang</span>
+        </div>
+        <div class="bg-[#12131f] border border-white/5 rounded-xl p-5 flex flex-col items-center text-center gap-3 hover:border-primary/30 transition-colors">
+          <i data-lucide="smartphone" class="w-6 h-6 text-primary"></i>
+          <span class="text-sm text-gray-300">Điện tử</span>
+        </div>
+        <div class="bg-[#12131f] border border-white/5 rounded-xl p-5 flex flex-col items-center text-center gap-3 hover:border-primary/30 transition-colors">
+          <i data-lucide="sofa" class="w-6 h-6 text-primary"></i>
+          <span class="text-sm text-gray-300">Gia dụng</span>
+        </div>
+        <div class="bg-[#12131f] border border-white/5 rounded-xl p-5 flex flex-col items-center text-center gap-3 hover:border-primary/30 transition-colors">
+          <i data-lucide="sparkles" class="w-6 h-6 text-primary"></i>
+          <span class="text-sm text-gray-300">Làm đẹp</span>
+        </div>
+        <div class="bg-[#12131f] border border-white/5 rounded-xl p-5 flex flex-col items-center text-center gap-3 hover:border-primary/30 transition-colors">
+          <i data-lucide="dumbbell" class="w-6 h-6 text-primary"></i>
+          <span class="text-sm text-gray-300">Thể thao</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section id="testimonials" class="max-w-6xl mx-auto px-4 sm:px-6 py-20">
+    <div class="text-center max-w-xl mx-auto mb-12">
+      <span class="text-primary text-xs font-semibold uppercase tracking-wide">Khách hàng nói gì</span>
+      <h2 class="font-heading font-extrabold text-2xl sm:text-3xl text-white mt-3">Được tin dùng bởi hàng nghìn nhà bán hàng</h2>
+    </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      <div class="bg-[#0F1120] border border-white/5 rounded-2xl p-6">
+        <div class="flex gap-1 text-primary mb-4">
+          <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+          <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+          <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+          <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+          <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+        </div>
+        <p class="text-sm text-gray-300 mb-5">"Nhờ Shoply, doanh thu cửa hàng của tôi tăng gấp đôi chỉ sau 3 tháng. Giao diện dễ dùng và hỗ trợ rất nhiệt tình."</p>
+        <div class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-full bg-primary/15 border border-primary/30 flex items-center justify-center text-primary text-sm font-semibold">L</div>
+          <div>
+            <div class="text-sm font-medium text-white">Lan Nguyễn</div>
+            <div class="text-xs text-gray-500">Chủ shop thời trang</div>
+          </div>
+        </div>
+      </div>
+      <div class="bg-[#0F1120] border border-white/5 rounded-2xl p-6">
+        <div class="flex gap-1 text-primary mb-4">
+          <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+          <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+          <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+          <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+          <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+        </div>
+        <p class="text-sm text-gray-300 mb-5">"Hệ thống quản lý đơn hàng và báo cáo doanh thu trực quan giúp tôi ra quyết định nhanh hơn rất nhiều."</p>
+        <div class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-full bg-primary/15 border border-primary/30 flex items-center justify-center text-primary text-sm font-semibold">M</div>
+          <div>
+            <div class="text-sm font-medium text-white">Minh Trần</div>
+            <div class="text-xs text-gray-500">Nhà phân phối điện tử</div>
+          </div>
+        </div>
+      </div>
+      <div class="bg-[#0F1120] border border-white/5 rounded-2xl p-6">
+        <div class="flex gap-1 text-primary mb-4">
+          <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+          <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+          <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+          <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+          <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+        </div>
+        <p class="text-sm text-gray-300 mb-5">"Đội ngũ hỗ trợ phản hồi cực nhanh, tích hợp vận chuyển tiện lợi giúp tôi tiết kiệm rất nhiều thời gian vận hành."</p>
+        <div class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-full bg-primary/15 border border-primary/30 flex items-center justify-center text-primary text-sm font-semibold">H</div>
+          <div>
+            <div class="text-sm font-medium text-white">Hoa Phạm</div>
+            <div class="text-xs text-gray-500">Chủ shop mỹ phẩm</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA banner -->
+  <section class="max-w-6xl mx-auto px-4 sm:px-6 pb-20">
+    <div class="rounded-2xl bg-gradient-to-br from-primary/20 via-[#0F1120] to-[#0F1120] border border-primary/20 px-6 sm:px-12 py-12 text-center">
+      <h2 class="font-heading font-extrabold text-2xl sm:text-3xl text-white">Sẵn sàng bắt đầu kinh doanh trực tuyến?</h2>
+      <p class="text-gray-400 text-sm sm:text-base mt-3 max-w-lg mx-auto">
+        Tạo cửa hàng miễn phí ngay hôm nay — không cần thẻ tín dụng, không ràng buộc dài hạn.
+      </p>
+      <a
+        href="register.html"
+        class="inline-flex items-center gap-2 bg-primary hover:bg-primary/90 active:bg-primary/80 text-white font-semibold text-sm rounded-lg px-6 py-3 transition-colors shadow-lg shadow-primary/20 mt-6"
+      >
+        Tạo tài khoản miễn phí
+        <i data-lucide="arrow-right" class="w-4 h-4"></i>
+      </a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="border-t border-white/5">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-12 grid sm:grid-cols-2 md:grid-cols-4 gap-8">
+      <div>
+        <a href="index.html" class="flex items-center gap-2 mb-3">
+          <div class="w-8 h-8 rounded-lg bg-primary/15 border border-primary/30 flex items-center justify-center">
+            <i data-lucide="shopping-bag" class="w-4.5 h-4.5 text-primary"></i>
+          </div>
+          <span class="font-heading font-extrabold text-white">Shoply</span>
+        </a>
+        <p class="text-sm text-gray-500">Nền tảng thương mại điện tử giúp bạn kinh doanh trực tuyến dễ dàng và hiệu quả.</p>
+      </div>
+      <div>
+        <h4 class="text-sm font-semibold text-white mb-3">Sản phẩm</h4>
+        <ul class="space-y-2 text-sm text-gray-500">
+          <li><a href="#features" class="hover:text-primary transition-colors">Tính năng</a></li>
+          <li><a href="#categories" class="hover:text-primary transition-colors">Danh mục</a></li>
+          <li><a href="charts.html" class="hover:text-primary transition-colors">Báo cáo</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="text-sm font-semibold text-white mb-3">Tài khoản</h4>
+        <ul class="space-y-2 text-sm text-gray-500">
+          <li><a href="login.html" class="hover:text-primary transition-colors">Đăng nhập</a></li>
+          <li><a href="register.html" class="hover:text-primary transition-colors">Đăng ký</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="text-sm font-semibold text-white mb-3">Công ty</h4>
+        <ul class="space-y-2 text-sm text-gray-500">
+          <li><a href="#" class="hover:text-primary transition-colors">Về chúng tôi</a></li>
+          <li><a href="#" class="hover:text-primary transition-colors">Điều khoản dịch vụ</a></li>
+          <li><a href="#" class="hover:text-primary transition-colors">Chính sách bảo mật</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="border-t border-white/5 py-6 text-center text-xs text-gray-600">
+      © 2026 Shoply. All rights reserved.
+    </div>
+  </footer>
+
+  <script>
+    lucide.createIcons();
+  </script>
+
+</body>
+</html>
