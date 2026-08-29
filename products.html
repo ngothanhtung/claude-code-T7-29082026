@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Sản phẩm — Shoply</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          bgdark: "#090A14",
+          primary: "#DF6B33",
+        },
+        fontFamily: {
+          heading: ["Plus Jakarta Sans", "sans-serif"],
+          body: ["Plus Jakarta Sans", "sans-serif"],
+        },
+      },
+    },
+  };
+</script>
+
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+
+<style>
+  body {
+    font-family: "Plus Jakarta Sans", sans-serif;
+  }
+  .font-heading {
+    font-family: "Plus Jakarta Sans", sans-serif;
+  }
+</style>
+</head>
+
+<body class="bg-bgdark text-gray-200">
+
+  <!-- Navbar -->
+  <header class="sticky top-0 z-30 border-b border-white/5 bg-bgdark/80 backdrop-blur">
+    <nav class="max-w-6xl mx-auto flex items-center justify-between px-4 sm:px-6 py-4">
+      <a href="index.html" class="flex items-center gap-2">
+        <div class="w-9 h-9 rounded-lg bg-primary/15 border border-primary/30 flex items-center justify-center">
+          <i data-lucide="shopping-bag" class="w-5 h-5 text-primary"></i>
+        </div>
+        <span class="font-heading font-extrabold text-lg text-white">Shoply</span>
+      </a>
+
+      <div class="hidden md:flex items-center gap-8 text-sm text-gray-400">
+        <a href="index.html#features" class="hover:text-white transition-colors">Tính năng</a>
+        <a href="products.html" class="text-white font-medium">Sản phẩm</a>
+        <a href="index.html#testimonials" class="hover:text-white transition-colors">Khách hàng</a>
+        <a href="charts.html" class="hover:text-white transition-colors">Báo cáo</a>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <a href="login.html" class="hidden sm:inline-block text-sm font-medium text-gray-300 hover:text-white transition-colors">Đăng nhập</a>
+        <a
+          href="register.html"
+          class="inline-flex items-center gap-1.5 bg-primary hover:bg-primary/90 active:bg-primary/80 text-white text-sm font-semibold rounded-lg px-4 py-2 transition-colors shadow-lg shadow-primary/20"
+        >
+          Bắt đầu
+          <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Page header -->
+  <section class="relative overflow-hidden">
+    <div class="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top,_rgba(223,107,51,0.18),_transparent_60%)]"></div>
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 pt-14 pb-10 sm:pt-20 sm:pb-14 text-center">
+      <span class="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 text-primary text-xs font-medium px-3 py-1 mb-5">
+        <i data-lucide="package" class="w-3.5 h-3.5"></i>
+        Bộ sưu tập mới nhất
+      </span>
+      <h1 class="font-heading font-extrabold text-3xl sm:text-5xl text-white leading-tight max-w-2xl mx-auto">
+        Khám phá sản phẩm <span class="text-primary">bán chạy nhất</span>
+      </h1>
+      <p class="text-gray-400 text-sm sm:text-base mt-4 max-w-xl mx-auto">
+        Hàng nghìn sản phẩm chất lượng từ thời trang, công nghệ đến nội thất — chọn lọc từ các nhà bán hàng uy tín trên Shoply.
+      </p>
+    </div>
+  </section>
+
+  <!-- Category filter -->
+  <section class="max-w-6xl mx-auto px-4 sm:px-6 mb-8">
+    <div id="categoryFilters" class="flex flex-wrap items-center justify-center gap-2">
+      <button data-filter="all" class="filter-btn px-4 py-2 rounded-full text-sm font-medium bg-primary text-white transition-colors">Tất cả</button>
+      <button data-filter="Thời trang" class="filter-btn px-4 py-2 rounded-full text-sm font-medium border border-white/10 text-gray-300 hover:bg-white/5 transition-colors">Thời trang</button>
+      <button data-filter="Công nghệ" class="filter-btn px-4 py-2 rounded-full text-sm font-medium border border-white/10 text-gray-300 hover:bg-white/5 transition-colors">Công nghệ</button>
+      <button data-filter="Phụ kiện" class="filter-btn px-4 py-2 rounded-full text-sm font-medium border border-white/10 text-gray-300 hover:bg-white/5 transition-colors">Phụ kiện</button>
+      <button data-filter="Nội thất" class="filter-btn px-4 py-2 rounded-full text-sm font-medium border border-white/10 text-gray-300 hover:bg-white/5 transition-colors">Nội thất</button>
+      <button data-filter="Làm đẹp" class="filter-btn px-4 py-2 rounded-full text-sm font-medium border border-white/10 text-gray-300 hover:bg-white/5 transition-colors">Làm đẹp</button>
+    </div>
+  </section>
+
+  <!-- Product grid -->
+  <section class="max-w-6xl mx-auto px-4 sm:px-6 pb-20">
+    <div id="productGrid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+
+      <!-- Card -->
+      <div data-category="Thời trang" class="product-card bg-[#0F1120] border border-white/5 rounded-2xl overflow-hidden group">
+        <div class="relative h-56 overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=800&q=80" alt="Giày sneaker trắng" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+          <span class="absolute top-3 left-3 bg-primary text-white text-xs font-semibold px-2.5 py-1 rounded-full">Bán chạy</span>
+        </div>
+        <div class="p-5">
+          <span class="text-xs text-gray-500">Thời trang</span>
+          <h3 class="text-white font-semibold mt-1">Giày Sneaker Classic</h3>
+          <div class="flex items-center gap-1 text-primary mt-2">
+            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
+            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
+            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
+            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
+            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
+            <span class="text-xs text-gray-500 ml-1">(214)</span>
+          </div>
+          <div class="flex items-center justify-between mt-4">
+            <span class="font-heading font-bold text-white">1.290.000₫</span>
+            <button class="w-9 h-9 rounded-lg bg-primary/15 border border-primary/30 flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-colors">
+              <i data-lucide="shopping-cart" class="w-4 h-4"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card -->
+      <div data-category="Công nghệ" class="product-card bg-[#0F1120] border border-white/5 rounded-2xl overflow-hidden group">
+        <div class="relative h-56 overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=800&q=80" alt="Tai nghe không dây" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+        </div>
+        <div class="p-5">
+          <span class="text-xs text-gray-500">Công nghệ</span>
+          <h3 class="text-white font-semibold mt-1">Tai Nghe Không Dây Pro</h3>
+          <div class="flex items-center gap-1 text-primary mt-2">
+            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
+            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
+            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
+            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
+            <i data-lucide="star" class="w-3.5 h-3.5 text-gray-600"></i>
+            <span class="text-xs text-gray-500 ml-1">(98)</span>
+          </div>
+          <div class="flex items-center justify-between mt-4">
+            <span class="font-heading font-bold text-white">2.450.000₫</span>
+            <button class="w-9 h-9 rounded-lg bg-primary/15 border border-primary/30 flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-colors">
+              <i data-lucide="shopping-cart" class="w-4 h-4"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card -->
+      <div data-category="Phụ kiện" class="product-card bg-[#0F1120] border border-white/5 rounded-2xl overflow-hidden group">
+        <div class="relative h-56 overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=800&q=80" alt="Đồng hồ đeo tay" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+          <span class="absolute top-3 left-3 bg-white/10 text-white text-xs font-semibold px-2.5 py-1 rounded-full backdrop-blur">Mới</span>
+        </div>
+        <div class="p-5">
+          <span class="text-xs text-gray-500">Phụ kiện</span>
+          <h3 class="text-white font-semibold mt-1">Đồng Hồ Cổ Điển</h3>
+          <div class="flex items-center gap-1 text-primary mt-2">
+            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
+            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
+            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
+            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
+            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
+            <span class="text-xs text-gray-500 ml-1">(356)</span>
+          </div>
+          <div class="flex items-center justify-between mt-4">
+            <span class="font-heading font-bold text-white">3.190.000₫</span>
+            <button class="w-9 h-9 rounded-lg bg-primary/15 border border-primary/30 flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-colors">
+              <i data-lucide="shopping-cart" class="w-4 h-4"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card -->
+      <div data-category="Phụ kiện" class="product-card bg-[#0F1120] border border-white/5 rounded-2xl overflow-hidden group">
+        <div class="relative h-56 overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=800&q=80" alt="Balo du lịch" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+        </div>
+        <div class="p-5">
+          <span class="text-xs text-gray-500">Phụ kiện</span>
+          <h3 class="text-white font-semibold mt-1">Balo Du Lịch Đa Năng</h3>
+          <div class="flex items-center gap-1 text-primary mt-2">
+            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
+            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
+            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
+            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
+            <i data-lucide="star" class="w-3.5 h-3.5 text-gray-600"></i>
+            <span class="text-xs text-gray-500 ml-1">(142)</span>
+          </div>
+          <div class="flex items-center justify-between mt-4">
+            <span class="font-heading font-bold text-white">890.000₫</span>
+            <button class="w-9 h-9 rounded-lg bg-primary/15 border border-primary/30 flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-colors">
+              <i data-lucide="shopping-cart" class="w-4 h-4"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card -->
+      <div data-category="Thời trang" class="product-card bg-[#0F1120] border border-white/5 rounded-2xl overflow-hidden group">
+        <div class="relative h-56 overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1572635196237-14b3f281503f?auto=format&fit=crop&w=800&q=80" alt="Kính mát thời trang" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+          <span class="absolute top-3 left-3 bg-red-500/90 text-white text-xs font-semibold px-2.5 py-1 rounded-full">-20%</span>
+        </div>
+        <div class="p-5">
+          <span class="text-xs text-gray-500">Thời trang</span>
+          <h3 class="text-white font-semibold mt-1">Kính Mát Thời Trang</h3>
+          <div class="flex items-center gap-1 text-primary mt-2">
+            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
+            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
+            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
+            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
+            <i data-lucide="star" class="w-3.5 h-3.5 text-gray-600"></i>
+            <span class="text-xs text-gray-500 ml-1">(76)</span>
+          </div>
+          <div class="flex items-center justify-between mt-4">
+            <div class="flex items-center gap-2">
+              <span class="font-heading font-bold text-white">640.000₫</span>
+              <span class="text-xs text-gray-500 line-through">800.000₫</span>
+            </div>
+            <button class="w-9 h-9 rounded-lg bg-primary/15 border border-primary/30 flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-colors">
+              <i data-lucide="shopping-cart" class="w-4 h-4"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card -->
+      <div data-category="Nội thất" class="product-card bg-[#0F1120] border border-white/5 rounded-2xl overflow-hidden group">
+        <div class="relative h-56 overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=800&q=80" alt="Ghế sofa phòng khách" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+        </div>
+        <div class="p-5">
+          <span class="text-xs text-gray-500">Nội thất</span>
+          <h3 class="text-white font-semibold mt-1">Sofa Phòng Khách Hiện Đại</h3>
+          <div class="flex items-center gap-1 text-primary mt-2">
+            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
+            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
+            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
+            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
+            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
+            <span class="text-xs text-gray-500 ml-1">(59)</span>
+          </div>
+          <div class="flex items-center justify-between mt-4">
+            <span class="font-heading font-bold text-white">8.990.000₫</span>
+            <button class="w-9 h-9 rounded-lg bg-primary/15 border border-primary/30 flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-colors">
+              <i data-lucide="shopping-cart" class="w-4 h-4"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card -->
+      <div data-category="Công nghệ" class="product-card bg-[#0F1120] border border-white/5 rounded-2xl overflow-hidden group">
+        <div class="relative h-56 overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1523206489230-c012c64b2b48?auto=format&fit=crop&w=800&q=80" alt="Đồng hồ thông minh" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+          <span class="absolute top-3 left-3 bg-white/10 text-white text-xs font-semibold px-2.5 py-1 rounded-full backdrop-blur">Mới</span>
+        </div>
+        <div class="p-5">
+          <span class="text-xs text-gray-500">Công nghệ</span>
+          <h3 class="text-white font-semibold mt-1">Đồng Hồ Thông Minh Series 5</h3>
+          <div class="flex items-center gap-1 text-primary mt-2">
+            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
+            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
+            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
+            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
+            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
+            <span class="text-xs text-gray-500 ml-1">(421)</span>
+          </div>
+          <div class="flex items-center justify-between mt-4">
+            <span class="font-heading font-bold text-white">4.590.000₫</span>
+            <button class="w-9 h-9 rounded-lg bg-primary/15 border border-primary/30 flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-colors">
+              <i data-lucide="shopping-cart" class="w-4 h-4"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card -->
+      <div data-category="Làm đẹp" class="product-card bg-[#0F1120] border border-white/5 rounded-2xl overflow-hidden group">
+        <div class="relative h-56 overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1585386959984-a4155224a1ad?auto=format&fit=crop&w=800&q=80" alt="Bộ sản phẩm chăm sóc da" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+        </div>
+        <div class="p-5">
+          <span class="text-xs text-gray-500">Làm đẹp</span>
+          <h3 class="text-white font-semibold mt-1">Bộ Chăm Sóc Da Tự Nhiên</h3>
+          <div class="flex items-center gap-1 text-primary mt-2">
+            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
+            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
+            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
+            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
+            <i data-lucide="star" class="w-3.5 h-3.5 text-gray-600"></i>
+            <span class="text-xs text-gray-500 ml-1">(187)</span>
+          </div>
+          <div class="flex items-center justify-between mt-4">
+            <span class="font-heading font-bold text-white">1.150.000₫</span>
+            <button class="w-9 h-9 rounded-lg bg-primary/15 border border-primary/30 flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-colors">
+              <i data-lucide="shopping-cart" class="w-4 h-4"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card -->
+      <div data-category="Thời trang" class="product-card bg-[#0F1120] border border-white/5 rounded-2xl overflow-hidden group">
+        <div class="relative h-56 overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=800&q=80" alt="Áo thun basic" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+          <span class="absolute top-3 left-3 bg-primary text-white text-xs font-semibold px-2.5 py-1 rounded-full">Bán chạy</span>
+        </div>
+        <div class="p-5">
+          <span class="text-xs text-gray-500">Thời trang</span>
+          <h3 class="text-white font-semibold mt-1">Áo Thun Basic Cotton</h3>
+          <div class="flex items-center gap-1 text-primary mt-2">
+            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
+            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
+            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
+            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
+            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
+            <span class="text-xs text-gray-500 ml-1">(302)</span>
+          </div>
+          <div class="flex items-center justify-between mt-4">
+            <span class="font-heading font-bold text-white">259.000₫</span>
+            <button class="w-9 h-9 rounded-lg bg-primary/15 border border-primary/30 flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-colors">
+              <i data-lucide="shopping-cart" class="w-4 h-4"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="text-center mt-10">
+      <button class="inline-flex items-center gap-2 border border-white/10 hover:bg-white/5 text-gray-200 font-semibold text-sm rounded-lg px-6 py-3 transition-colors">
+        Xem thêm sản phẩm
+        <i data-lucide="chevron-down" class="w-4 h-4"></i>
+      </button>
+    </div>
+  </section>
+
+  <!-- Featured product spotlight -->
+  <section class="border-y border-white/5 bg-[#0F1120]/60">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-20 grid md:grid-cols-2 gap-10 items-center">
+      <div class="rounded-2xl overflow-hidden border border-white/5">
+        <img src="https://images.unsplash.com/photo-1560343090-f0409e92791a?auto=format&fit=crop&w=1000&q=80" alt="Sản phẩm nổi bật" class="w-full h-full object-cover" />
+      </div>
+      <div>
+        <span class="text-primary text-xs font-semibold uppercase tracking-wide">Sản phẩm nổi bật</span>
+        <h2 class="font-heading font-extrabold text-2xl sm:text-3xl text-white mt-3">Giày Thể Thao Cao Cấp — Phiên Bản Giới Hạn</h2>
+        <p class="text-gray-400 text-sm mt-4">
+          Thiết kế tối giản, chất liệu cao cấp và đế đệm êm ái mang lại trải nghiệm thoải mái suốt cả ngày.
+          Chỉ còn số lượng giới hạn — sở hữu ngay hôm nay.
+        </p>
+        <div class="flex items-center gap-3 mt-5">
+          <div class="flex items-center gap-1 text-primary">
+            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+          </div>
+          <span class="text-sm text-gray-500">4.9/5 (620 đánh giá)</span>
+        </div>
+        <div class="flex items-center gap-4 mt-6">
+          <span class="font-heading font-extrabold text-2xl text-white">2.890.000₫</span>
+          <span class="text-sm text-gray-500 line-through">3.600.000₫</span>
+        </div>
+        <a
+          href="#"
+          class="inline-flex items-center gap-2 bg-primary hover:bg-primary/90 active:bg-primary/80 text-white font-semibold text-sm rounded-lg px-6 py-3 transition-colors shadow-lg shadow-primary/20 mt-6"
+        >
+          <i data-lucide="shopping-cart" class="w-4 h-4"></i>
+          Thêm vào giỏ hàng
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="border-t border-white/5">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-12 grid sm:grid-cols-2 md:grid-cols-4 gap-8">
+      <div>
+        <a href="index.html" class="flex items-center gap-2 mb-3">
+          <div class="w-8 h-8 rounded-lg bg-primary/15 border border-primary/30 flex items-center justify-center">
+            <i data-lucide="shopping-bag" class="w-4.5 h-4.5 text-primary"></i>
+          </div>
+          <span class="font-heading font-extrabold text-white">Shoply</span>
+        </a>
+        <p class="text-sm text-gray-500">Nền tảng thương mại điện tử giúp bạn kinh doanh trực tuyến dễ dàng và hiệu quả.</p>
+      </div>
+      <div>
+        <h4 class="text-sm font-semibold text-white mb-3">Sản phẩm</h4>
+        <ul class="space-y-2 text-sm text-gray-500">
+          <li><a href="index.html#features" class="hover:text-primary transition-colors">Tính năng</a></li>
+          <li><a href="products.html" class="hover:text-primary transition-colors">Danh mục</a></li>
+          <li><a href="charts.html" class="hover:text-primary transition-colors">Báo cáo</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="text-sm font-semibold text-white mb-3">Tài khoản</h4>
+        <ul class="space-y-2 text-sm text-gray-500">
+          <li><a href="login.html" class="hover:text-primary transition-colors">Đăng nhập</a></li>
+          <li><a href="register.html" class="hover:text-primary transition-colors">Đăng ký</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="text-sm font-semibold text-white mb-3">Công ty</h4>
+        <ul class="space-y-2 text-sm text-gray-500">
+          <li><a href="#" class="hover:text-primary transition-colors">Về chúng tôi</a></li>
+          <li><a href="#" class="hover:text-primary transition-colors">Điều khoản dịch vụ</a></li>
+          <li><a href="#" class="hover:text-primary transition-colors">Chính sách bảo mật</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="border-t border-white/5 py-6 text-center text-xs text-gray-600">
+      © 2026 Shoply. All rights reserved.
+    </div>
+  </footer>
+
+  <script>
+    lucide.createIcons();
+
+    const filterButtons = document.querySelectorAll(".filter-btn");
+    const productCards = document.querySelectorAll(".product-card");
+
+    function setActiveButton(activeBtn) {
+      filterButtons.forEach((btn) => {
+        if (btn === activeBtn) {
+          btn.classList.add("bg-primary", "text-white");
+          btn.classList.remove("border", "border-white/10", "text-gray-300", "hover:bg-white/5");
+        } else {
+          btn.classList.remove("bg-primary", "text-white");
+          btn.classList.add("border", "border-white/10", "text-gray-300", "hover:bg-white/5");
+        }
+      });
+    }
+
+    filterButtons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const filter = btn.dataset.filter;
+        setActiveButton(btn);
+        productCards.forEach((card) => {
+          const show = filter === "all" || card.dataset.category === filter;
+          card.classList.toggle("hidden", !show);
+        });
+      });
+    });
+  </script>
+
+</body>
+</html>
